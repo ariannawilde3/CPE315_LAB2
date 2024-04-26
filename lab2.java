@@ -194,16 +194,12 @@ public class lab2 {
     public static void main(String[] args) {
 
             try {
-                System.out.println(args.length);
-                System.out.println(args[0]);
-                System.out.println(args[1]);
-                System.out.println(args[2]);
-                if(args.length < 2) {
+                if(args.length < 1) {
                     System.out.println("You need to specify the full path to the input file.");
                     return;
                 }
                 //readAndProcessFile("test.asm");
-                readAndProcessFile(args[1]);
+                readAndProcessFile(args[0]);
             } catch(Exception ex) {
                 System.out.println("Exception occured");
             }
