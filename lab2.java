@@ -196,7 +196,7 @@ public class lab2 {
             try {
                 if(args.length() < 2) {
                     System.out.println("You need to specify the full path to the input file.");
-                    return -1;
+                    return;
                 }
                 //readAndProcessFile("test.asm");
                 readAndProcessFile(args[1]);
