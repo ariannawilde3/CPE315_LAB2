@@ -625,12 +625,12 @@ public class lab2 {
                             int immediateValue = Integer.parseInt(segments[3]);
                             String immediateString = Integer.toBinaryString(immediateValue & 0xFFFF);
                             if (immediateString.length() > 16) {
-                                immediateString = immediateString.substring(immediateString.length() - 16); // Ensuring it's exactly 16 bits
+                                immediateString = immediateString.substring(immediateString.length() - 16); 
                             }
                             immediateString = String.format("%16s", immediateString).replace(' ', '0');
                             result += " " + immediateString;
                         } catch (NumberFormatException e) {
-                            result += " 0000000000000000"; // Default immediate if parsing fails
+                            result += " 0000000000000000"; 
                         }
                     
                         break;
@@ -658,18 +658,18 @@ public class lab2 {
                     
                         try {
                             // Calculating and formatting the offset
-                            int targetAddress = labelToLineMap.get(segments[3]); // Assuming you have a way to convert label to address
-                            int currentAddress = currentInstructionIndex; // This should be the index of this instruction in the instruction array
-                            int offsetValue = targetAddress - (currentAddress + 1); // MIPS branch offset is from the next instruction
-                            String offsetString = Integer.toBinaryString(offsetValue & 0xFFFF); // Ensure it is only 16 bits
+                            int targetAddress = labelToLineMap.get(segments[3]); 
+                            int currentAddress = currentInstructionIndex; 
+                            int offsetValue = targetAddress - (currentAddress + 1); 
+                            String offsetString = Integer.toBinaryString(offsetValue & 0xFFFF); 
                             if (offsetString.length() > 16) {
                                 offsetString = offsetString.substring(offsetString.length() - 16); // Correcting length if necessary
                             }
-                            offsetString = String.format("%16s", offsetString).replace(' ', '0'); // Ensure it is padded to 16 bits
+                            offsetString = String.format("%16s", offsetString).replace(' ', '0'); 
                             result += " " + offsetString;
                         }
                         catch (NumberFormatException e) {
-                            result += " 0000000000000000"; // Default offset if parsing fails
+                            result += " 0000000000000000"; 
                         }
                     
                         break;
@@ -700,63 +700,17 @@ public class lab2 {
                                             // offset (16 bits)
                     try {
                         // offset (16 bits) calculated from label
-                        int targetAddress = labelToLineMap.get(segments[3]); // Assuming you have a way to convert label to address
-                        int currentAddress = currentInstructionIndex; // This should be the index of this instruction in the instruction array
-                        int offsetValue = targetAddress - (currentAddress + 1); // MIPS branch offset is from the next instruction
+                        int targetAddress = labelToLineMap.get(segments[3]); 
+                        int currentAddress = currentInstructionIndex; 
+                        int offsetValue = targetAddress - (currentAddress + 1); 
                         String offsetString = Integer.toBinaryString(0x10000 | (offsetValue & 0xFFFF)).substring(1);
                         result += " " + offsetString;
                     }
                     catch (NumberFormatException e) {
-                        result += " 0000000000000000"; // Default offset if parsing fails
+                        result += " 0000000000000000"; // 
                     }
                     
                     break;
-                
-                // case "bne":
-                //     // Format in line for bne is: opcode rs rt offset
-                //     // opcode (6 bits) | rs (5 bits) | rt (5 bits) | offset (16 bits)
-                
-                //     // opcode (6 bits) - bne = 000101
-                //     result += "000101";
-                
-                //     // rs (5 bits)
-                //     if(segments[2].contains("$")) {
-                //         String rsString = Integer.toBinaryString(registerNameToIntegerMap.get(segments[2]));
-                //         rsString = String.format("%5s", rsString).replace(' ', '0');
-                //         result += " " + rsString;
-                //     } else {
-                //         String rsString = Integer.toBinaryString(Integer.parseInt(segments[2]));
-                //         rsString = String.format("%5s", rsString).replace(' ', '0');
-                //         result += " " + rsString;
-                //     }
-                
-                //     // rt (5 bits)
-                //     if(segments[3].contains("$")) {
-                //         String rtString = Integer.toBinaryString(registerNameToIntegerMap.get(segments[3]));
-                //         rtString = String.format("%5s", rtString).replace(' ', '0');
-                //         result += " " + rtString;
-                //     } else if( (segments[3].charAt(0) >= 'A' && segments[3].charAt(0) <= 'Z') || ( segments[3].charAt(0) >= 'a' && segments[3].charAt(0) <= 'z') ) {
-                //         // it's not a number, so it could be a label
-                //         String rtString = Integer.toBinaryString(0x10000 | lab2.labelToLineMap.get(segments[3]));
-                //         rtString = String.format("%5s", rtString).replace(' ', '0');
-                //         result += " " + rtString;
-                //     }
-                //     else {
-                //         String rtString = Integer.toBinaryString(Integer.parseInt(segments[3]));
-                //         rtString = String.format("%5s", rtString).replace(' ', '0');
-                //         result += " " + rtString;
-                //     }
-                
-                //     // offset (16 bits)
-                //     try {
-                //         int offsetValue = Integer.parseInt(segments[4]);
-                //         String offsetString = Integer.toBinaryString(0x10000 | offsetValue).substring(1);
-                //         result += " " + offsetString;
-                //     } catch (NumberFormatException e) {
-                //         result += " 0000000000000000"; // Default offset if parsing fails
-                //     }
-                
-                //     break;
  
                 case "lw":
                     // Format in line for lw is: opcode base rt offset
@@ -784,7 +738,7 @@ public class lab2 {
                         rtString = String.format("%5s", rtString).replace(' ', '0');
                         result += " " + rtString;
                     } else {
-                        result += " 00000"; // Default rt if not properly formatted
+                        result += " 00000"; 
                     }
                 
                     try {
@@ -794,7 +748,7 @@ public class lab2 {
                         offsetString = String.format("%16s", offsetString).replace(' ', '0'); // Ensure it is padded to 16 bits
                         result += " " + offsetString;
                     } catch (NumberFormatException e) {
-                        result += " 0000000000000000"; // Default offset if parsing fails
+                        result += " 0000000000000000"; 
                     }
                 
                     break;
@@ -817,7 +771,7 @@ public class lab2 {
                         baseString = String.format("%5s", baseString).replace(' ', '0');
                         result += " " + baseString;
                     } else {
-                        result += " 00000"; // Default base if not found or incorrect parsing
+                        result += " 00000"; 
                     }
                 
                     // rt (5 bits)
@@ -826,17 +780,17 @@ public class lab2 {
                         rtString = String.format("%5s", rtString).replace(' ', '0');
                         result += " " + rtString;
                     } else {
-                        result += " 00000"; // Default rt if not properly formatted
+                        result += " 00000"; // Default if not properly formatted
                     }
                 
                     try {
                         // Calculating and formatting the offset
                         int offsetValue = Integer.parseInt(swOffsetPart);
                         String offsetString = Integer.toBinaryString(0xFFFF & offsetValue);
-                        offsetString = String.format("%16s", offsetString).replace(' ', '0'); // Ensure it is padded to 16 bits
+                        offsetString = String.format("%16s", offsetString).replace(' ', '0'); 
                         result += " " + offsetString;
                     } catch (NumberFormatException e) {
-                        result += " 0000000000000000"; // Default offset if parsing fails
+                        result += " 0000000000000000"; 
                     }
                 
                     break;
@@ -847,7 +801,7 @@ public class lab2 {
                         // opcode (6 bits) - j = 000010
                         result += "000010";
                     
-                        // Assuming segments[1] is the label name, e.g., 'test1'
+                        // segments[1] is the label name
                         String jLabel = segments[1];  // This should be a label like 'test1'
                     
                         // Retrieve the address from the map
@@ -855,12 +809,11 @@ public class lab2 {
                     
                         if (labelAddress == null) {
                             // If no address found, handle as an error or set a default
-                            System.err.println("Label '" + jLabel + "' not found.");
-                            result += " " + "00000000000000000000000000"; // Default to zero address if label not found
+                            result += " " + "00000000000000000000000000"; 
                         } else {
                             // Convert the address to a 26-bit binary string
                             String addressString = Integer.toBinaryString(labelAddress & 0x03FFFFFF); // Mask to ensure it's within 26 bits
-                            addressString = String.format("%26s", addressString).replace(' ', '0'); // Pad with zeros to ensure it's exactly 26 bits
+                            addressString = String.format("%26s", addressString).replace(' ', '0'); 
                             result += " " + addressString;
                         }
                     
@@ -880,7 +833,7 @@ public class lab2 {
                         address = labelToLineMap.get(labelName);
                     } else {
                         try {
-                            address = Integer.parseInt(labelName);  // Direct address handling
+                            address = Integer.parseInt(labelName);  
                         } catch (NumberFormatException e) {
                             address = 0; // Default address if parsing fails or label not found
                         }
